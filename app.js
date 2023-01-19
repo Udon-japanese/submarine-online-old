@@ -13,9 +13,9 @@ var indexRouter = require('./routes/index');
 const gameRouter = require('./routes/game');
 
 passport.use(new Strategy({
-  consumerKey: config.twitter.consumerKey,
-  consumerSecret: config.twitter.consumerSecret,
-  callbackURL: config.twitter.callbackURL
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: CALLBACK_URL
   },
   (token, tokenSecret, profile, cb) => {
     process.nextTick(() => cb(null, profile));
