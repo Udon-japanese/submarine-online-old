@@ -424,7 +424,6 @@ function drawMap(gameObj) {
 
         gameObj.ctxRadar.font = '11px Arial';
         gameObj.ctxRadar.fillText('missile', distanceObj.drawX + 20, distanceObj.drawY - 20 - 2);
-        console.log('ミサイル描画中')
       } else { // 他人のミサイルの描画
 
         const degreeDiff = calcDegreeDiffFromRadar(gameObj.deg, distanceObj.degree);

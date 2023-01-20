@@ -5,8 +5,7 @@ function createWebSocketServer(io, game) {
 
     const displayName = socket.handshake.query.displayName;
     const thumbUrl = socket.handshake.query.thumbUrl;
-
-    console.log('WebSocket のコネクションがありました。');
+    
     const startObj = game.newConnection(socket.id, displayName, thumbUrl);
     socket.emit('start data', startObj);
 
