@@ -6,16 +6,19 @@ var logger = require('morgan');
 const helmet = require('helmet');
 const session = require('express-session');
 const passport = require('passport');
+require('dotenv').config();
 const Strategy = require('passport-twitter').Strategy;
-const config = require('./config');
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL || 'http://localhost:8000/oauth_callback';
 
 var indexRouter = require('./routes/index');
 const gameRouter = require('./routes/game');
 
 passport.use(new Strategy({
-  consumerKey: config.twitter.consumerKey,
-  consumerSecret: config.twitter.consumerSecret,
-  callbackURL: config.twitter.callbackURL
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: CALLBACK_URL
   },
   (token, tokenSecret, profile, cb) => {
     process.nextTick(() => cb(null, profile));
@@ -31,7 +34,8 @@ app.use(
     crossOriginEmbedderPolicy: false,
     contentSecurityPolicy: {
       directives: {
-        imgSrc: ["'self'", "*.twimg.com"]
+        imgSrc: ["'self'", "*.twimg.com"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net"]
       }
     }
   })
